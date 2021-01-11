@@ -22,5 +22,6 @@
         <div id="app" >
             @yield('content')
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     </body>
 </html>

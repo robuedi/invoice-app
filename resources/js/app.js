@@ -1,10 +1,11 @@
 require('./bootstrap');
 
-
 window.Vue = require('vue');
 
-Vue.component('invoice-index-component', require('./components/InvoiceIndextComponent.vue').default);
-Vue.component('invoice-location-component', require('./components/InvoiceLocationComponent.vue').default);
+import Form from './Form'
+window.Form = Form
+
+Vue.component('invoice-home-component', require('./components/InvoiceHomeComponent.vue').default);
 
 const app = new Vue({
     el: '#app',
