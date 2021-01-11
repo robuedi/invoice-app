@@ -27,21 +27,21 @@
         </form>
         <table class="table table-striped mt-3 editable-table">
             <thead>
-            <tr>
-                <th>Location</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Value</th>
-            </tr>
+                <tr>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Value</th>
+                </tr>
             </thead>
             <tbody >
-            <tr v-for="invoice in invoices" :key="invoice.id">
-                <td>{{invoice.invoice_header.location.name}}</td>
-                <td>{{invoice.invoice_header.date}}</td>
-                <td>{{invoice.invoice_header.status}}</td>
-                <td>{{invoice.value}}</td>
-            </tr>
-            <tr v-if="!invoices.length"><td colspan="4">No records.</td></tr>
+                <tr v-for="invoice in invoices" :key="invoice.id">
+                    <td>{{invoice.invoice_header.location.name}}</td>
+                    <td>{{invoice.invoice_header.date}}</td>
+                    <td>{{invoice.invoice_header.status}}</td>
+                    <td>{{invoice.value}}</td>
+                </tr>
+                <tr v-if="!invoices.length"><td colspan="4">No records.</td></tr>
             </tbody>
         </table>
     </div>
@@ -66,6 +66,7 @@
         },
         methods: {
             getLocations(){
+                //get the locations
                 axios.get('api/v1/location').then((res) => {
                     this.locations = res.data.data;
                 }).catch((error) => {
@@ -73,6 +74,7 @@
                 })
             },
             getInvoiceStatuses(){
+                //get the invoices statuses
                 axios.get('api/v1/invoice/statuses').then((res) => {
                     this.statuses = res.data.data;
                 }).catch((error) => {
@@ -80,6 +82,7 @@
                 })
             },
             setDateRangerPicker(){
+                //set the date picker
                 var that = this;
                 var picker = new Lightpick({
                     field: document.getElementById('start_date'),
@@ -101,11 +104,10 @@
                     end_date: this.form.endDate
                 };
 
-                console.log(data);
                 //filter empty values
                 Object.keys(data).forEach((key) => (data[key] === '') && delete data[key]);
 
-                console.log(data);
+                //get the invoices
                 axios.get('api/v1/invoice', {
                     params: data
                 }).then((res) => {

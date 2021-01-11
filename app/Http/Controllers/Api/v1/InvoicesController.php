@@ -4,11 +4,14 @@
 namespace App\Http\Controllers\Api\v1;
 
 
-use App\Http\Resources\StatusResource;
+use App\Http\Resources\InvoiceSumCollectionResource;
+use App\Http\Resources\StatusCollectionResource;
 use App\Models\InvoiceHeader;
 use App\Models\InvoiceLine;
 use Illuminate\Http\Request;
 use App\Http\Resources\FullInvoiceCollectionResource;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class InvoicesController
 {
@@ -41,19 +44,34 @@ class InvoicesController
             });
         }
 
-        return new FullInvoiceCollectionResource($invoice_info->with('invoice_header', 'invoice_header.location')->get());
+        return new FullInvoiceCollectionResource($invoice_info->select('value', 'invoice_header_id')->with('invoice_header', 'invoice_header.location')->get());
     }
 
-    public function invoicesByLocation()
+    public function getInvoicesByLocation(Request $request) : InvoiceSumCollectionResource
     {
+        //get invoice info
+        $invoice_info = InvoiceLine::join('invoice_headers', 'invoice_headers.id', '=', 'invoice_lines.invoice_header_id')
+            ->select('status', DB::raw('SUM(value) as value'))
+            ->groupBy('invoice_headers.status');
 
+        //check for location filtering
+        if($request->has('location'))
+        {
+            $invoice_info->join('locations', function($join) use ($request)
+            {
+                $join->on('invoice_headers.location_id', '=', 'locations.id');
+                $join->where('locations.id','=', $request->get('location'));
+            });
+        }
+
+        return new InvoiceSumCollectionResource($invoice_info->get());
     }
 
-    public function invoicesStatuses() : StatusResource
+    public function invoicesStatuses() : StatusCollectionResource
     {
         $statuses = InvoiceHeader::select('status')->distinct()->get();
 
-        return new StatusResource($statuses);
+        return new StatusCollectionResource($statuses);
     }
 
 }

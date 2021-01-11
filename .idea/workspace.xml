@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc700efc-fb81-46c5-b189-35192c97326f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/LocationsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/InvoiceHomeComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InvoicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InvoicesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/StatusResource.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/mysql/data/ibtmp1" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/ibtmp1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/InvoiceIndextComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/InvoiceIndexComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/InvoiceIndexComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/InvoiceIndexComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/InvoiceLocationComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/InvoiceLocationComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +172,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610368699722</updated>
-      <workItem from="1610368701087" duration="12608000" />
+      <workItem from="1610368701087" duration="16478000" />
     </task>
     <servers />
   </component>

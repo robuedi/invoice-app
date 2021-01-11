@@ -2031,6 +2031,7 @@ __webpack_require__.r(__webpack_exports__);
     getLocations: function getLocations() {
       var _this = this;
 
+      //get the locations
       axios.get('api/v1/location').then(function (res) {
         _this.locations = res.data.data;
       })["catch"](function (error) {
@@ -2040,6 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
     getInvoiceStatuses: function getInvoiceStatuses() {
       var _this2 = this;
 
+      //get the invoices statuses
       axios.get('api/v1/invoice/statuses').then(function (res) {
         _this2.statuses = res.data.data;
       })["catch"](function (error) {
@@ -2047,6 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setDateRangerPicker: function setDateRangerPicker() {
+      //set the date picker
       var that = this;
       var picker = new lightpick__WEBPACK_IMPORTED_MODULE_0___default.a({
         field: document.getElementById('start_date'),
@@ -2068,13 +2071,12 @@ __webpack_require__.r(__webpack_exports__);
         location: this.form.location,
         start_date: this.form.startDate,
         end_date: this.form.endDate
-      };
-      console.log(data); //filter empty values
+      }; //filter empty values
 
       Object.keys(data).forEach(function (key) {
         return data[key] === '' && delete data[key];
-      });
-      console.log(data);
+      }); //get the invoices
+
       axios.get('api/v1/invoice', {
         params: data
       }).then(function (res) {
@@ -2124,15 +2126,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      invoicesInfo: [{
-        id: 1,
-        value: 231,
-        status: 'pending'
-      }]
+      invoicesInfo: [],
+      locations: [],
+      form: new Form({
+        location: ''
+      })
     };
+  },
+  methods: {
+    getLocations: function getLocations() {
+      var _this = this;
+
+      //get the locations
+      axios.get('api/v1/location').then(function (res) {
+        _this.locations = res.data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getInvoices: function getInvoices() {
+      var _this2 = this;
+
+      var data = {
+        location: this.form.location
+      }; //filter empty values
+
+      Object.keys(data).forEach(function (key) {
+        return data[key] === '' && delete data[key];
+      }); //get the invoices
+
+      axios.get('api/v1/invoice/info-location', {
+        params: data
+      }).then(function (res) {
+        _this2.invoicesInfo = res.data.data;
+
+        _this2.form.reset();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getLocations();
+    this.getInvoices();
   }
 });
 
@@ -43207,24 +43260,108 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.getInvoices()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-row mt-3" }, [
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.location,
+                    expression: "form.location"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "location",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option"),
+                _vm._v(" "),
+                _vm._l(_vm.locations, function(location) {
+                  return _c("option", { domProps: { value: location.id } }, [
+                    _vm._v(_vm._s(location.name))
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    ),
+    _vm._v(" "),
     _c("table", { staticClass: "table table-striped mt-3 editable-table" }, [
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.invoicesInfo, function(invoiceInfo) {
-          return _c("tr", { key: invoiceInfo.id }, [
-            _c("td", [_vm._v(_vm._s(invoiceInfo.value))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoiceInfo.status))])
-          ])
-        }),
-        0
+        [
+          _vm._l(_vm.invoicesInfo, function(invoiceInfo) {
+            return _c("tr", { key: invoiceInfo.id }, [
+              _c("td", [_vm._v(_vm._s(invoiceInfo.value))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(invoiceInfo.status))])
+            ])
+          }),
+          _vm._v(" "),
+          !_vm.invoicesInfo.length
+            ? _c("tr", [
+                _c("td", { attrs: { colspan: "4" } }, [_vm._v("No records.")])
+              ])
+            : _vm._e()
+        ],
+        2
       )
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "clearfix mb-2 mt-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success float-right",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Submit")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
